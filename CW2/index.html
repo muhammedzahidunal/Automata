@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>DFA for (1|0)*00 and NFA for (1|0)*00 </title>
+</head>
+
+<body>
+
+    <h2 id=title></h2>
+
+    <p>Find last two elemans "00"</p>
+
+   w = <input id=input type=text value=50 onChange="test()"> &emsp;
+   
+
+    <pre id=out></pre>
+
+    <hr />
+    <b>Logic</b>
+    <p></p>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 0 50px;
+        }
+
+        th {
+            color: blue;
+            padding: 5px 12px;
+        }
+
+        td {
+            border: 1px solid blue;
+            padding: 5px 12px;
+            text-align: center;
+        }
+    </style>
+    <div style="width:450px;height: 400px;float: left">
+        <table>
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+            </tr>
+            <tr>
+                <th>> A</th>
+                <td>B</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <th>&emsp;B</th>
+                <td>C</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <th>* C</th>
+                <td>C</td>
+                <td>A</td>
+            </tr>
+        </table>
+
+        <pre id=sampleForDfa></pre>
+    </div>
+    <div style="width:600px;height: 400px;float: left">
+        <table>
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+            </tr>
+            <tr>
+                <th>> a</th>
+                <td>b</td>
+                <td>a</td>
+            </tr>
+            <tr>
+                <th>&emsp;b</th>
+                <td>c</td>
+                <td>a</td>
+            </tr>
+            <tr>
+                <th>* c</th>
+                <td>ϕ</td>
+                <td>ϕ</td>
+            </tr>
+        </table>
+
+        <pre id=sampleForNfa></pre>
+    </div>
+    <!--p>Ref: <a href="https:xxx" 
+   target="ExternalDocument">xxx</a>
+</p-->
+    <script>
+        "use strict";
+        function deltaDfa(q, c) { // (1|0)*00
+            if (q == 'A' && c == '0') return 'B'
+            if (q == 'B' && c == '0') return 'C'
+            if (q == 'C' && c == '0') return 'C'
+            if (c == '1') return 'A'
+            return '';  //default -- no transition
+        }
+        function acceptDfa(w, F = 'C', q = 'A') {
+            //w: input String
+            //F: final state(s)
+            //q: current state
+            let i = 0, txt = q
+            while (i < w.length) {
+                q = deltaDfa(q, w[i])
+                if (q == '') break
+                i++; txt += " -> " + q
+            }
+            input.selectionStart = i
+            input.selectionEnd = i + 1
+            let a = (q != '' && F.includes(q))
+            return a
+        }
+        "use strict";
+        function union(a, b) { //set operation using strings
+            let s = a
+            for (let x of b) if (!a.includes(x)) s += x
+            return s
+        }
+        function intersect(a, b) {
+            let s = ''
+            for (let x of b) if (a.includes(x)) s += x
+            return s
+        }
+        function deltaNfa(q, c) { // (1|0)*10
+            if (q == 'a' && c == '0') return 'b'
+            if (q == 'a' && c == '1') return 'a'
+            if (q == 'b' && c == '0') return 'bc'
+            if (q == 'b' && c == '1') return 'a'
+            return '';  //default -- no transition
+        }
+        function acceptNfa(w, F = 'c', Q = 'a') {
+            //w: input String
+            //F: final state(s)
+            //Q: current state(s)
+            let i = 0, txt = Q
+            while (i < w.length) {
+                let c = w[i], T = ''
+                for (let q of Q)
+                    T = union(T, deltaNfa(q, c))
+                Q = T
+                if (Q == '') break
+                i++; txt += ", " + c + " -> " + Q + '\n' + Q
+            }
+            input.selectionStart = i
+            input.selectionEnd = i + 1
+            let a = intersect(Q, F).length > 0
+            return a
+        }
+
+        function regex(w) {
+            var e = /00$/
+           return e.test(w);
+            
+
+        }
+
+        function tryNumber() {
+            let nfa = []
+            let dfa = []
+            let rdizi = []
+            for (let n = 1; n < 50; n++) {
+                let w = n.toString(2)  // to binary
+                if (acceptNfa(w)) nfa.push(n);
+                if (acceptDfa(w)) dfa.push(n);
+                if (regex(w)) rdizi.push(n)
+
+                out.innerHTML = "NFA: " + nfa + "\n" + "DFA: " + dfa + "\n" + "Regex: " + rdizi;
+            }
+        }
+        function test() {
+            tryNumber(input.value);
+
+        }
+
+        title.innerText = document.title;
+        sampleForDfa.innerText = deltaDfa
+        sampleForNfa.innerText = deltaNfa
+        test();
+    </script>
+
+
+</body>
+
+</html>
