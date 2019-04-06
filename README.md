@@ -1,4 +1,4 @@
-Automata-Classworks
+Classworks
 
   [CW2-DFA-NFA-RegExp](https://muhammedzahidunal.github.io/Automata/CW2)
   
