@@ -1,9 +1,13 @@
 Automata
 
-  [CW2](https://muhammedzahidunal.github.io/Automata/CW2)
+  [CW2-DFA-NFA-RegExp](https://muhammedzahidunal.github.io/Automata/CW2)
   
-  [CW3](https://muhammedzahidunal.github.io/Automata/CW3)
+  [CW3-Regular Expressions](https://muhammedzahidunal.github.io/Automata/CW3)
+  
+  [CW4-Context Free Grammar](https://muhammedzahidunal.github.io/Automata/CW4)
+  
+  [CW5-Expression Parser](https://muhammedzahidunal.github.io/Automata/CW5)
   
 Homework
 
-  [HW1](https://muhammedzahidunal.github.io/Automata/HW1)
+  [HW1-RegExp Text Coloring](https://muhammedzahidunal.github.io/Automata/HW1)
