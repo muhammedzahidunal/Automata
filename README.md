@@ -6,7 +6,7 @@ Classworks
   
   [CW4-Context Free Grammar](https://muhammedzahidunal.github.io/Automata/CW4)
   
-  [CW5-Expression Parser](https://muhammedzahidunal.github.io/Automata/CW5)
+  [CW5-Expression Parser](https://muhammedzahidunal.github.io/Automata/CW5/Expression.html)
   
 Homework
 
