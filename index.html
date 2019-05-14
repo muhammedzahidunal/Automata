@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Muhammed Zahid Ünal</title>
+    <link rel="manifest" href="manifest.json">
+	 <link rel="shortcut icon" href="images/JS.png">
+    <link rel="icon" sizes="192x192" href="images/JS.png">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('sw.js')
+                .then((reg) => { console.log('SW Registered', reg) })
+                .catch(console.log)
+        }
+    </script>
+</head>
+<style>
+        dd {
+            background: orangered;
+            font-size: 20px;
+            line-height: 35px;
+            height: 40px;
+            margin: 5px;
+            text-align: center;
+            width: 350px;
+        }
+		.links ul dd {
+		color:white
+		}
+		
+		.links ul dd a{
+		color:white
+		}
+		
+		.links ul dd a:hover{
+		color:blue
+		}
+</style>
+<body>
+
+<center>
+    <div class="links">
+        <h3>Github:</h3>
+        <ul>
+            <dd><a href="https://github.com/muhammedzahidunal/Automata">My Github Repo</a></dd>
+        </ul>
+        <h3>Project:</h3>
+        <ul>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/TermProject/index.html">DFA Transition</a></dd>
+        </ul>
+        <h3>Class Works:</h3>
+        <ul>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW2/index.html">CW2 - NFA, DFA and RegExp Example</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW3/index.html">CW3 - Regular Expressions</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW4/index.html">CW4 - Context Free Grammar</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW5/Expression.html">CW5 - Expressions</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW6/index.html">CW6 - PDA</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/CW7/microJ3.html">CW7 - microJ</a></dd>
+        </ul>
+        <h3>Homeworks:</h3>
+        <ul>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/HW1/index.html">HW1 - Regular Expressions</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/HW2/Expression.html">HW2 - Context Free Grammar</a></dd>
+            <dd><a href="https://muhammedzahidunal.github.io/Automata/HW3/microJ1.html">HW3 - Modify MicroJ1</a></dd>
+        </ul> 
+
+    </div>
+</center>
+</body>
+
+</html>
