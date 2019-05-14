@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DFA Visualization</title>
+</head>
+
+<body>
+
+    <h2>Deterministic Finite Automata Visualization</h2>
+    
+    <hr>
+    <h3>Tanım:</h3>
+
+    DFA'da girdi değeri sonlu sayıda duruma sahiptir.Her bir durum için makinanın hareket edeceği durum belirlenebilir. <br>
+    Bir kelimenin doğru olup olmadığına bakmak içinbaşlangıç nodundan yani kelimeninilk harfinden başlanır. <br>
+    İçinde bulunan noddayken elimizdeki harfhangi noda gidiyorsa o noda varılır. <br>
+    Aranan kelimenin bir sonraki harfine bakılır ve vardığımız nodda, elimizdeki harf ile hangi noda gittiğine bakılır ve o noda gidilir.<br> 
+    Kelimenin son harfine vardığımızda eğer içinde bulunduğumuz nod sonlu bir nod (sonlu nodlar çift çember ile belirtilir) ise kelime doğrudur.<br>
+    <br>
+    DFA beşli ifadeden oluşturularak tanımlanır. <br>
+    <b>M = (Q, Σ , δ , s, F)</b> <br>
+    <br>
+    Q : durumlar,nodların sonlu kümesidir<br>
+    Σ : alfabe içindeki harflerden oluşan sonlu bir kümedir<br>
+    δ : Q x Σ -> Q geçiş fonksiyonudur<br>
+    s : başlangıç durumudur<br>
+    F : ulaşması istenilen sonlu nodlar kümesidir.<br>
+    
+    <br>
+    <a href="http://kilavuz.sourceforge.net/dok/gelistirme/dfa.html">Reference:</a>
+    <hr>
+
+
+    <h4>DFA Example for <b>L = (1|0)*00</b></h4>
+    <p>Input = <input id="input" value="110001100"> <button style="margin-left: 50px" onclick="nextButtonCliced()">Next</button> </p>
+
+    <br>
+    <p id="out">&emsp;</p>
+    <p id="result"></p>
+    <br>
+
+    <canvas id="canvas" width="600px" height="500px"> </canvas>
+    <script>
+
+        var inputText , F, q;
+        var A = [55,82], B = [266,82], C = [471,82];   //vertex positions
+        var finished = false;
+        inputText = document.getElementById("input").value;
+        F='C';
+        q = 'A';
+        let i = 0;
+        out.innerHTML = input.value;
+
+        drawOnDiagram(window[q][0],window[q][1]);
+
+        function nextButtonCliced(){
+            inputText = document.getElementById("input").value;
+            if(i<inputText.length){
+                q = deltaDfa(q, inputText[i]);
+                if(q == ''){
+                    checkFinalState(q);
+                }
+                else if(i+1 == inputText.length){
+                    drawOnDiagram(window[q][0],window[q][1]);
+                    checkFinalState(q);
+                }
+                else{
+                    drawOnDiagram(window[q][0],window[q][1]);
+                }
+                i++;
+                out.innerHTML = input.value.slice(i) ;
+            }
+            else if(finished){
+                i=0;
+                q="A";
+                result.innerHTML = "";
+                drawOnDiagram(A[0],A[1]);
+                out.innerHTML = input.value;
+            }
+        }
+
+        function checkFinalState(a){
+            if(q == 'C'){
+                result.innerHTML = '<span style = "color:green" >Accepted!</span>';
+            }
+            else{
+                result.innerHTML = '<span style = "color:red" >Rejected!</span>';
+            }
+            finished= true;
+        }
+        
+        function deltaDfa(q, c) { // (1|0)*00
+            if (q == 'A' && c == '0') return 'B'
+            if (q == 'A' && c == '1') return 'A'
+            if (q == 'B' && c == '0') return 'C'
+            if (q == 'B' && c == '1') return 'A'
+            if (q == 'C' && c == '0') return 'C'
+            if (q == 'C' && c == '1') return 'A'
+            return '';  //default -- no transition
+        }
+
+        function drawOnDiagram(x, y) {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            canvas.width = canvas.width;
+            var diagramImage = new Image();
+            diagramImage.onload = function () {
+                ctx.drawImage(diagramImage, 0, 0);
+                ctx.beginPath();
+                ctx.rect(x, y, 81, 81);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#0000FF';
+                ctx.stroke();
+            }
+            diagramImage.src = "diagram.png";
+        }
+    </script>
+</body>
+</html>
